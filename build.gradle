@@ -1,0 +1,54 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id "org.flywaydb.flyway" version "7.3.1"
+}
+
+group = 'com.gumroad'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+task migrateGumroadRatings(type: org.flywaydb.gradle.task.FlywayMigrateTask) {
+	url = "jdbc:postgresql://localhost:5432/gumroad"
+	user = "rakshit"
+	password = "rakshit"
+	locations = ["filesystem:${project.projectDir}/src/main/resources/db/migration"]
+}
+
+flyway {
+	url = "jdbc:postgresql://localhost:5432/gumroad"
+	user = "rakshit"
+	password = "rakshit"
+	locations = ["filesystem:${project.projectDir}/src/main/resources/db/migration"]
+}
+
+project.afterEvaluate {
+	flywayMigrate.dependsOn("migrateGumroadRatings")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.flywaydb:flyway-core'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.postgresql:postgresql:42.2.11'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
