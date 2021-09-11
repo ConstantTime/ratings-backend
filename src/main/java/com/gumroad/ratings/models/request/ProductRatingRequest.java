@@ -1,4 +1,4 @@
-package com.gumroad.ratings.models.response;
+package com.gumroad.ratings.models.request;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ProductReview {
+public class ProductRatingRequest {
     private BigDecimal rating;
     private String review;
 }

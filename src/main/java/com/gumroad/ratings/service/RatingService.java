@@ -2,9 +2,9 @@ package com.gumroad.ratings.service;
 
 import com.gumroad.ratings.db.models.RatingEntity;
 import com.gumroad.ratings.db.repository.RatingRepository;
-import com.gumroad.ratings.models.request.ProductReviewRequest;
-import com.gumroad.ratings.models.response.ProductReview;
-import com.gumroad.ratings.models.response.ProductReviewResponse;
+import com.gumroad.ratings.models.request.ProductRatingRequest;
+import com.gumroad.ratings.models.response.ProductRating;
+import com.gumroad.ratings.models.response.ProductRatingResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,30 +19,30 @@ public class RatingService {
         this.ratingRepository = ratingRepository;
     }
 
-    public void saveRating(String productId, ProductReviewRequest productReviewRequest) {
+    public void saveRating(String productId, ProductRatingRequest productRatingRequest) {
         RatingEntity ratingEntity = new RatingEntity();
-        ratingEntity.setRating(productReviewRequest.getRating());
+        ratingEntity.setRating(productRatingRequest.getRating());
         ratingEntity.setRatingId(UUID.randomUUID().toString());
-        ratingEntity.setReview(productReviewRequest.getReview());
+        ratingEntity.setReview(productRatingRequest.getReview());
         ratingEntity.setProductId(productId);
         ratingRepository.save(ratingEntity);
     }
 
-    public void updateRating(String ratingId, ProductReviewRequest productReviewRequest) {
-        ratingRepository.updateRatingAndReview(productReviewRequest.getRating(),
-                productReviewRequest.getReview(), ratingId);
+    public void updateRating(String ratingId, ProductRatingRequest productRatingRequest) {
+        ratingRepository.updateRatingAndReview(productRatingRequest.getRating(),
+                productRatingRequest.getReview(), ratingId);
     }
 
-    public ProductReviewResponse getTop3RatingsAndReviews(String productId) {
+    public ProductRatingResponse getTop3RatingsAndReviews(String productId) {
         List<RatingEntity> ratingEntityList = ratingRepository.findThreeBestRatingsFor(productId);
-        ProductReviewResponse productReviewResponse = new ProductReviewResponse();
-        List<ProductReview> productReviews = new ArrayList<>();
+        ProductRatingResponse productRatingResponse = new ProductRatingResponse();
+        List<ProductRating> productRatings = new ArrayList<>();
 
         ratingEntityList.forEach(ratingEntity ->
-                productReviews.add(new ProductReview(ratingEntity.getRating(), ratingEntity.getReview())));
+                productRatings.add(new ProductRating(ratingEntity.getRatingId(), ratingEntity.getRating(), ratingEntity.getReview())));
 
-        productReviewResponse.setProductReviews(productReviews);
+        productRatingResponse.setProductRatings(productRatings);
 
-        return productReviewResponse;
+        return productRatingResponse;
     }
 }

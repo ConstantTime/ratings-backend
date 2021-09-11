@@ -9,6 +9,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ProductReviewResponse {
-    List<ProductReview> productReviews;
+public class ProductRatingResponse {
+    List<ProductRating> productRatings;
 }
