@@ -1,0 +1,1 @@
+create index product_id_idx on ratings(product_id);
