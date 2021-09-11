@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RatingService {
@@ -21,14 +22,15 @@ public class RatingService {
     public void saveRating(String productId, ProductReviewRequest productReviewRequest) {
         RatingEntity ratingEntity = new RatingEntity();
         ratingEntity.setRating(productReviewRequest.getRating());
+        ratingEntity.setRatingId(UUID.randomUUID().toString());
         ratingEntity.setReview(productReviewRequest.getReview());
         ratingEntity.setProductId(productId);
         ratingRepository.save(ratingEntity);
     }
 
-    public void updateRating(String productId, ProductReviewRequest productReviewRequest) {
+    public void updateRating(String ratingId, ProductReviewRequest productReviewRequest) {
         ratingRepository.updateRatingAndReview(productReviewRequest.getRating(),
-                productReviewRequest.getReview(), productId);
+                productReviewRequest.getReview(), ratingId);
     }
 
     public ProductReviewResponse getTop3RatingsAndReviews(String productId) {

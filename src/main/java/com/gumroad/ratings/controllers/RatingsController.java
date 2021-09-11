@@ -31,12 +31,12 @@ public class RatingsController {
     }
 
     @PutMapping(
-            value = "/rating/{product_id}",
+            value = "/rating/{rating_id}",
             produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity updateRating(@PathVariable(name = "product_id") String productId,
+    public ResponseEntity updateRating(@PathVariable(name = "rating_id") String ratingId,
                                      @RequestBody ProductReviewRequest productReviewRequest) {
-        ratingService.updateRating(productId, productReviewRequest);
+        ratingService.updateRating(ratingId, productReviewRequest);
         return new ResponseEntity(HttpStatus.OK);
     }
 
