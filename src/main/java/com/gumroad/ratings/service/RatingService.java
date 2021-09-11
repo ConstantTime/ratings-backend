@@ -36,9 +36,8 @@ public class RatingService {
         ProductReviewResponse productReviewResponse = new ProductReviewResponse();
         List<ProductReview> productReviews = new ArrayList<>();
 
-        ratingEntityList.forEach(ratingEntity -> {
-            productReviews.add(new ProductReview(ratingEntity.getRating(), ratingEntity.getReview()));
-        });
+        ratingEntityList.forEach(ratingEntity ->
+                productReviews.add(new ProductReview(ratingEntity.getRating(), ratingEntity.getReview())));
 
         productReviewResponse.setProductReviews(productReviews);
 

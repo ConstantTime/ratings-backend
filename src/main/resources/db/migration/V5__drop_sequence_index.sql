@@ -1,0 +1,1 @@
+drop sequence reviews_id_seq;
