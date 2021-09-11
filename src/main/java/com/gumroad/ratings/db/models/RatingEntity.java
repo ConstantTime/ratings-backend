@@ -21,4 +21,6 @@ public class RatingEntity {
     private String productId;
 
     private BigDecimal rating;
+
+    private String review;
 }
