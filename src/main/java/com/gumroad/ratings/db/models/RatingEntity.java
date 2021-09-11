@@ -3,6 +3,7 @@ package com.gumroad.ratings.db.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ public class RatingEntity {
     private Long id;
 
     @Column(name = "product_id")
-    private Long productId;
+    private String productId;
 
-    private double rating;
+    private BigDecimal rating;
 }

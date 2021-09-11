@@ -21,5 +21,5 @@ public class ProductEntity {
 
     private String name;
 
-    private double description;
+    private String description;
 }

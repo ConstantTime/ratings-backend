@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @Log4j2
 @RestController
 @RequestMapping(path = "/api/v1/gumroad")
@@ -23,7 +25,7 @@ public class RatingsController {
             produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity addRatings(@PathVariable(name = "product_id") String productId,
-                                     @RequestBody Double rating) {
+                                     @RequestBody BigDecimal rating) {
         ratingService.addRating(productId, rating);
         return new ResponseEntity(HttpStatus.OK);
     }
