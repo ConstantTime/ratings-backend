@@ -7,10 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+
 @Repository
 public interface RatingRepository extends JpaRepository<RatingEntity, Long> {
     @Modifying
     @Transactional
     @Query(value = "update ratings r set r.rating=?1 where r.product_id=?2" , nativeQuery = true)
-    void setRatingForProduct(Double rating, String productId);
+    void setRatingForProduct(BigDecimal rating, String productId);
 }

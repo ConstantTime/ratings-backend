@@ -14,10 +14,14 @@ public class RatingService {
         this.ratingRepository = ratingRepository;
     }
 
-    public void addRating(String productId, BigDecimal rating) {
+    public void saveRating(String productId, BigDecimal rating) {
         RatingEntity ratingEntity = new RatingEntity();
         ratingEntity.setRating(rating);
         ratingEntity.setProductId(productId);
         ratingRepository.save(ratingEntity);
+    }
+
+    public void updateRating(String productId, BigDecimal rating) {
+        ratingRepository.setRatingForProduct(rating, productId);
     }
 }

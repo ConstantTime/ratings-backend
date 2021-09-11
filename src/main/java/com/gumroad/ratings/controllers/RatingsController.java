@@ -24,9 +24,19 @@ public class RatingsController {
             value = "/rating/{product_id}",
             produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity addRatings(@PathVariable(name = "product_id") String productId,
+    public ResponseEntity addRating(@PathVariable(name = "product_id") String productId,
                                      @RequestBody BigDecimal rating) {
-        ratingService.addRating(productId, rating);
+        ratingService.saveRating(productId, rating);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PutMapping(
+            value = "/rating/{product_id}",
+            produces = {MediaType.APPLICATION_JSON_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity updateRating(@PathVariable(name = "product_id") String productId,
+                                     @RequestBody BigDecimal rating) {
+        ratingService.updateRating(productId, rating);
         return new ResponseEntity(HttpStatus.OK);
     }
 }
