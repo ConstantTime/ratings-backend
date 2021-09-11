@@ -13,6 +13,6 @@ import java.math.BigDecimal;
 public interface RatingRepository extends JpaRepository<RatingEntity, Long> {
     @Modifying
     @Transactional
-    @Query(value = "update ratings r set r.rating=?1 where r.product_id=?2" , nativeQuery = true)
+    @Query(value = "update RatingEntity r set r.rating=?1 where r.productId=?2")
     void setRatingForProduct(BigDecimal rating, String productId);
 }
