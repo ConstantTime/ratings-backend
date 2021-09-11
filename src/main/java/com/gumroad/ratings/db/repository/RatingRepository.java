@@ -17,6 +17,6 @@ public interface RatingRepository extends JpaRepository<RatingEntity, Long> {
     @Query(value = "update RatingEntity r set r.rating=?1, r.review=?2 where r.ratingId=?3")
     void updateRatingAndReview(BigDecimal rating, String review, String ratingId);
 
-    @Query(value = "select * from ratings r order by r.rating desc limit 3", nativeQuery = true)
+    @Query(value = "select * from ratings r where r.product_id=?1 order by r.rating desc limit 3", nativeQuery = true)
     List<RatingEntity> findThreeBestRatingsFor(String productId);
 }
