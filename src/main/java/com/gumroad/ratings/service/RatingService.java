@@ -4,7 +4,6 @@ import com.gumroad.ratings.db.models.RatingEntity;
 import com.gumroad.ratings.db.repository.RatingRepository;
 import com.gumroad.ratings.models.request.ProductRatingRequest;
 import com.gumroad.ratings.models.response.ProductRating;
-import com.gumroad.ratings.models.response.ProductRatingResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,16 +32,13 @@ public class RatingService {
                 productRatingRequest.getReview(), ratingId);
     }
 
-    public ProductRatingResponse getTop3RatingsAndReviews(String productId) {
+    public List<ProductRating> getTop3RatingsAndReviews(String productId) {
         List<RatingEntity> ratingEntityList = ratingRepository.findThreeBestRatingsFor(productId);
-        ProductRatingResponse productRatingResponse = new ProductRatingResponse();
         List<ProductRating> productRatings = new ArrayList<>();
 
         ratingEntityList.forEach(ratingEntity ->
                 productRatings.add(new ProductRating(ratingEntity.getRatingId(), ratingEntity.getRating(), ratingEntity.getReview())));
 
-        productRatingResponse.setProductRatings(productRatings);
-
-        return productRatingResponse;
+        return productRatings;
     }
 }

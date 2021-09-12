@@ -1,9 +1,7 @@
 package com.gumroad.ratings.controllers;
 
-import com.gumroad.ratings.models.request.ProductRatingRequest;
 import com.gumroad.ratings.models.request.ProductRequest;
 import com.gumroad.ratings.models.response.Product;
-import com.gumroad.ratings.models.response.ProductRatingResponse;
 import com.gumroad.ratings.service.ProductService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -23,6 +21,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @CrossOrigin
     @PostMapping(
             value = "/product",
             produces = {MediaType.APPLICATION_JSON_VALUE},
@@ -32,6 +31,7 @@ public class ProductController {
         return new ResponseEntity(product, HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping(
             value = "/product",
             produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -40,6 +40,7 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping(
             value = "/product/{product_id}",
             produces = {MediaType.APPLICATION_JSON_VALUE})
