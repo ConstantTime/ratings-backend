@@ -7,6 +7,7 @@ import com.gumroad.ratings.models.response.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +23,7 @@ public class ProductService {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setName(productRequest.getName());
         productEntity.setDescription(productRequest.getDescription());
+        productEntity.setProductId(UUID.randomUUID().toString());
         ProductEntity entity = productRepository.save(productEntity);
 
         return new Product(entity.getProductId(), entity.getName(), entity.getDescription());

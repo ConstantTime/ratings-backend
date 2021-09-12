@@ -34,8 +34,7 @@ public class ProductController {
 
     @GetMapping(
             value = "/product",
-            produces = {MediaType.APPLICATION_JSON_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity getProducts() {
         List<Product> products = productService.getProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
@@ -43,8 +42,7 @@ public class ProductController {
 
     @GetMapping(
             value = "/product/{product_id}",
-            produces = {MediaType.APPLICATION_JSON_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity getProducts(@PathVariable(name = "product_id") String productId) {
         Product product = productService.getProduct(productId);
         return new ResponseEntity<>(product, HttpStatus.OK);
