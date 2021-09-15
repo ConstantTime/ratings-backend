@@ -22,16 +22,17 @@ public class RatingsController {
         this.ratingService = ratingService;
     }
 
+    @CrossOrigin
     @PostMapping(
             value = "/rating/{product_id}",
-            produces = {MediaType.APPLICATION_JSON_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity addRatingAndReview(@PathVariable(name = "product_id") String productId,
                                      @RequestBody ProductRatingRequest productRatingRequest) {
         ratingService.saveRating(productId, productRatingRequest);
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @CrossOrigin
     @PutMapping(
             value = "/rating/{rating_id}",
             produces = {MediaType.APPLICATION_JSON_VALUE},
@@ -42,10 +43,10 @@ public class RatingsController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping(
             value = "/rating/top3/{product_id}",
-            produces = {MediaType.APPLICATION_JSON_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity getTop3RatingsForProduct(@PathVariable(name = "product_id") String productId) {
         List<ProductRating> productRatings = ratingService.getTop3RatingsAndReviews(productId);
         return new ResponseEntity<>(productRatings, HttpStatus.OK);
